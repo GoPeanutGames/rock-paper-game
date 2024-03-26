@@ -24,7 +24,7 @@ jobs:
           aws-region: us-west-2
 
       - name: List files in the directory
-        run: ls -R ./public
+        run: ls -al
 
       - name: Uploading to S3 development
         if: github.base_ref == 'development'
