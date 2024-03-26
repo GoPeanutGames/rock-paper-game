@@ -23,13 +23,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
-      - name: List files in the directory
-        run: ls -al
-
       - name: Uploading to S3 development
         if: github.base_ref == 'development'
-        run: aws s3 cp ./Build s3://peanutgames/rock-dev --recursive
+        run: |
+          find ./Build -type f -exec aws s3 cp {} s3://peanutgames/rock-dev/{} --cache-control 'max-age=31536000, immutable' --content-encoding 'br' \;
 
       - name: Uploading to S3 Production
         if: github.base_ref == 'main'
-        run: aws s3 cp ./Build s3://peanutgames/rock-prod --recursive
+        run: |
+          find ./Build -type f -exec aws s3 cp {} s3://peanutgames/rock-prod/{} --cache-control 'max-age=31536000, immutable' --content-encoding 'br' \;
