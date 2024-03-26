@@ -28,8 +28,8 @@ jobs:
 
       - name: Uploading to S3 development
         if: github.base_ref == 'development'
-        run: aws s3 cp ./Build s3://peanutgames/rock-dev --recursive --acl public-read
+        run: aws s3 cp ./Build s3://peanutgames/rock-dev --recursive
 
       - name: Uploading to S3 Production
         if: github.base_ref == 'main'
-        run: aws s3 cp ./Build s3://peanutgames/rock-prod --recursive --acl public-read
+        run: aws s3 cp ./Build s3://peanutgames/rock-prod --recursive
