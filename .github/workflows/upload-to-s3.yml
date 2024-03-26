@@ -27,10 +27,10 @@ jobs:
       - name: List files in the directory
         run: ls -R ./public
 
-      - name: Upload to S3
+      - name: Uploading to S3 development
         if: github.base_ref == 'development'
         run: aws s3 cp ./Build s3://peanutgames/rock-dev --recursive --acl public-read
 
-      - name: Upload to S3 Production
+      - name: Uploading to S3 Production
         if: github.base_ref == 'QA'
         run: aws s3 cp ./Build s3://peanutgames/rock-prod --recursive --acl public-read
