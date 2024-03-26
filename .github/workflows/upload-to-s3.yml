@@ -26,9 +26,9 @@ jobs:
       - name: Uploading to S3 development
         if: github.base_ref == 'development'
         run: |
-          find ./Build -type f -exec aws s3 cp {} s3://peanutgames/rock-dev/{} --cache-control 'max-age=31536000' --content-encoding 'br' \;
+          cd Build && find ./ -type f -exec aws s3 cp {} s3://peanutgames/rock-dev/{} --cache-control 'max-age=31536000' --content-encoding 'br' \;
 
       - name: Uploading to S3 Production
         if: github.base_ref == 'main'
         run: |
-          find ./Build -type f -exec aws s3 cp {} s3://peanutgames/rock-prod/{} --cache-control 'max-age=31536000' --content-encoding 'br' \;
+          cd Build && find ./ -type f -exec aws s3 cp {} s3://peanutgames/rock-prod/{} --cache-control 'max-age=31536000' --content-encoding 'br' \;
