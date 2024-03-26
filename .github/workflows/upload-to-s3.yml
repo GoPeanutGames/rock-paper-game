@@ -4,9 +4,8 @@ on:
   pull_request:
     types: [opened, synchronize]
     branches:
+      - main
       - development
-      - QA
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -32,5 +31,5 @@ jobs:
         run: aws s3 cp ./Build s3://peanutgames/rock-dev --recursive --acl public-read
 
       - name: Uploading to S3 Production
-        if: github.base_ref == 'QA'
+        if: github.base_ref == 'main'
         run: aws s3 cp ./Build s3://peanutgames/rock-prod --recursive --acl public-read
