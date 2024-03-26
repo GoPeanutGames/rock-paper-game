@@ -26,9 +26,9 @@ jobs:
       - name: Uploading to S3 development
         if: github.base_ref == 'development'
         run: |
-          find ./Build -type f -exec bash -c 'file="$1"; aws s3 cp "$file" "s3://peanutgames/rock-dev/${file##*/}" --cache-control "max-age=31536000" --content-encoding "br"' _ {} \;
+          find ./Build -type f -exec bash -c 'file="$1"; mime=$(file -b --mime-type "$file"); if [[ "$file" == *.br ]]; then encoding="--content-encoding br"; else encoding=""; fi; aws s3 cp "$file" "s3://peanutgames/rock-dev/${file##*/}" --cache-control "max-age=31536000" $encoding' _ {} \;
 
       - name: Uploading to S3 Production
         if: github.base_ref == 'main'
         run: |
-          find ./Build -type f -exec bash -c 'file="$1"; aws s3 cp "$file" "s3://peanutgames/rock-prod/${file##*/}" --cache-control "max-age=31536000" --content-encoding "br"' _ {} \;
+          find ./Build -type f -exec bash -c 'file="$1"; mime=$(file -b --mime-type "$file"); if [[ "$file" == *.br ]]; then encoding="--content-encoding br"; else encoding=""; fi; aws s3 cp "$file" "s3://peanutgames/rock-prod/${file##*/}" --cache-control "max-age=31536000" $encoding' _ {} \;
