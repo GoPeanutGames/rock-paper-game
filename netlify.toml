@@ -30,7 +30,7 @@
     X-Frame-Options = "DENY"
     X-Xss-Protection = "1; mode=block"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Access-Control-Allow-Origin = "*.peanutgames.com, *.peanuhub.dev, *.netlify.app"
+    Access-Control-Allow-Origin = "*.peanutgames.com,peanutgames.s3.us-west-2.amazonaws.com,*.peanuhub.dev, *.netlify.app"
     Accept-Encoding = "gzip, compress, br"
     Cache-Control = '''
           max-age=0,
