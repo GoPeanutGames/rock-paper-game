@@ -1,0 +1,44 @@
+[[headers]]
+  for = "/Build/*.data.br"
+  [headers.values]
+    Content-Encoding = "br"
+    Content-Type = "application/octet-stream"
+
+[[headers]]
+  for = "/Build/*.wasm.br"
+  [headers.values]
+    Content-Encoding = "br"
+    Content-Type = "application/wasm"
+
+[[headers]]
+  for = "/Build/*.js"
+  [headers.values]
+    Content-Encoding = "js"
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/Build/*.js.br"
+  [headers.values]
+    Content-Encoding = "br"
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Referrer-Policy = "no-referrer"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-Xss-Protection = "1; mode=block"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Access-Control-Allow-Origin = "*.peanutgames.com, *.peanuhub.dev, *.netlify.app"
+    Accept-Encoding = "gzip, compress, br"
+    Cache-Control = '''
+          max-age=0,
+          no-cache,
+          no-store,
+          must-revalidate'''
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
