@@ -29,14 +29,12 @@ jobs:
           find ./Build -type f -exec bash -c '
             file="$1"
             ext="${file##*.}"
-            if [[ "$ext" == "js" ]]; then
-              encoding="gzip"
-            elif [[ "$ext" == "br" ]]; then
-              encoding="br"
+            if [[ "$ext" == "br" ]]; then
+              encoding="--content-encoding br"
             else
-              encoding="binary"
+              encoding=""
             fi
-            aws s3 cp "$file" "s3://peanutgames/rock-dev/${file##*/}" --cache-control "max-age=31536000" --content-encoding "$encoding"
+            aws s3 cp "$file" "s3://peanutgames/rock-dev/${file##*/}" --cache-control "max-age=31536000" $encoding
           ' _ {} \;
 
       - name: Uploading to S3 Production
@@ -45,12 +43,10 @@ jobs:
           find ./Build -type f -exec bash -c '
             file="$1"
             ext="${file##*.}"
-            if [[ "$ext" == "js" ]]; then
-              encoding="gzip"
-            elif [[ "$ext" == "br" ]]; then
-              encoding="br"
+            if [[ "$ext" == "br" ]]; then
+              encoding="--content-encoding br"
             else
-              encoding="binary"
+              encoding=""
             fi
-            aws s3 cp "$file" "s3://peanutgames/rock-prod/${file##*/}" --cache-control "max-age=31536000" --content-encoding "$encoding"
+            aws s3 cp "$file" "s3://peanutgames/rock-prod/${file##*/}" --cache-control "max-age=31536000" $encoding
           ' _ {} \;
