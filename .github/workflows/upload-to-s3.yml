@@ -23,12 +23,34 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
-      - name: Uploading to S3 development
+      - name: Uploading to S3 Development
         if: github.base_ref == 'development'
         run: |
-          find ./Build -type f -exec bash -c 'file="$1"; aws s3 cp "$file" "s3://peanutgames/rock-dev/${file##*/}" --cache-control "max-age=31536000" --content-encoding "br"' _ {} \;
+          find ./Build -type f -exec bash -c '
+            file="$1"
+            ext="${file##*.}"
+            if [[ "$ext" == "js" ]]; then
+              encoding="gzip"
+            elif [[ "$ext" == "br" ]]; then
+              encoding="br"
+            else
+              encoding="binary"
+            fi
+            aws s3 cp "$file" "s3://peanutgames/rock-dev/${file##*/}" --cache-control "max-age=31536000" --content-encoding "$encoding"
+          ' _ {} \;
 
       - name: Uploading to S3 Production
         if: github.base_ref == 'main'
         run: |
-          find ./Build -type f -exec bash -c 'file="$1"; aws s3 cp "$file" "s3://peanutgames/rock-prod/${file##*/}" --cache-control "max-age=31536000" --content-encoding "br"' _ {} \;
+          find ./Build -type f -exec bash -c '
+            file="$1"
+            ext="${file##*.}"
+            if [[ "$ext" == "js" ]]; then
+              encoding="gzip"
+            elif [[ "$ext" == "br" ]]; then
+              encoding="br"
+            else
+              encoding="binary"
+            fi
+            aws s3 cp "$file" "s3://peanutgames/rock-prod/${file##*/}" --cache-control "max-age=31536000" --content-encoding "$encoding"
+          ' _ {} \;
