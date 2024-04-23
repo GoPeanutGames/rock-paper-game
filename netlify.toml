@@ -27,7 +27,7 @@
   [headers.values]
     Referrer-Policy = "no-referrer"
     X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-Xss-Protection = "1; mode=block"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Access-Control-Allow-Origin = "*.peanutgames.com,peanutgames.s3.us-west-2.amazonaws.com,*.peanuhub.dev, *.netlify.app"
