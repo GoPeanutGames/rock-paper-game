@@ -32,11 +32,12 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Access-Control-Allow-Origin = "*.peanutgames.com, *.peanuhub.dev, *.netlify.app"
     Accept-Encoding = "gzip, compress, br"
+    Content-Security-Policy = "frame-ancestors 'self' *.peanutgames.com, *.peanuhub.dev, *.netlify.app"
     Cache-Control = '''
           max-age=0,
           no-cache,
           no-store,
-          must-revalidate'''
+          must-revalidate'''          
 
 [[redirects]]
   from = "/*"
